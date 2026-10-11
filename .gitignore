@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+env/
+
+# Test cache
+.pytest_cache/
+
+# Local SQLite database (created at runtime)
+data/
+
+# Environment files
+.env
+
+# OS / editor files
+.DS_Store
+Thumbs.db

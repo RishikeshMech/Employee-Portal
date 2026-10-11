@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Employee Leave Portal{% endblock %}
+
+{% block content %}
+    <!-- ============ Leave request form ============ -->
+    <section class="card">
+        <h2>Submit a leave request</h2>
+        <form method="POST" action="/request" class="leave-form">
+            <div class="form-row">
+                <label for="employee_name">Employee name</label>
+                <input type="text" id="employee_name" name="employee_name"
+                       placeholder="Jane Doe" required>
+            </div>
+
+            <div class="form-row">
+                <label for="leave_type">Leave type</label>
+                <select id="leave_type" name="leave_type" required>
+                    <option value="Annual">Annual</option>
+                    <option value="Sick">Sick</option>
+                    <option value="Personal">Personal</option>
+                    <option value="Maternity/Paternity">Maternity/Paternity</option>
+                    <option value="Unpaid">Unpaid</option>
+                </select>
+            </div>
+
+            <div class="form-row two-col">
+                <div>
+                    <label for="start_date">Start date</label>
+                    <input type="date" id="start_date" name="start_date" required>
+                </div>
+                <div>
+                    <label for="end_date">End date</label>
+                    <input type="date" id="end_date" name="end_date" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label for="reason">Reason (optional)</label>
+                <textarea id="reason" name="reason" rows="3"
+                          placeholder="Short note for your manager..."></textarea>
+            </div>
+
+            <button type="submit" class="btn">Submit request</button>
+        </form>
+    </section>
+
+    <!-- ============ List of requests ============ -->
+    <section class="card">
+        <h2>All leave requests</h2>
+        {% if requests %}
+            <table class="leave-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Employee</th>
+                        <th>Type</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>Reason</th>
+                        <th>Status</th>
+                        <th>Submitted</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for r in requests %}
+                        <tr>
+                            <td>{{ r[0] }}</td>
+                            <td>{{ r[1] }}</td>
+                            <td>{{ r[2] }}</td>
+                            <td>{{ r[3] }}</td>
+                            <td>{{ r[4] }}</td>
+                            <td>{{ r[5] }}</td>
+                            <td><span class="badge badge-{{ r[6].lower() }}">{{ r[6] }}</span></td>
+                            <td>{{ r[7] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="empty">No leave requests yet. Submit one above! ✨</p>
+        {% endif %}
+    </section>
+{% endblock %}

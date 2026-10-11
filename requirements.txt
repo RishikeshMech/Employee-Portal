@@ -1,0 +1,5 @@
+# Core dependency for the web app
+Flask==3.0.3
+
+# Used by the tests in tests/test_app.py
+pytest==8.2.2
